@@ -8,9 +8,11 @@
   --vanilla: #FFF8F0;
 }
 
-* {
-  margin: 0;
+*,
+*::before,
+*::after {
   padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
@@ -24,6 +26,10 @@ img {
   width: 100%;
   display: block;
 }
+
+/* ==========================
+   HEADER / NAV - MOBILE FIRST
+========================== */
 
 header {
   background: white;
@@ -64,9 +70,21 @@ header {
 }
 
 .nav-links {
-  display: flex;
-  list-style: none;
+  position: absolute;
+  top: 90px;
+  left: 0;
+  width: 100%;
+  background: white;
+  display: none;
+  flex-direction: column;
+  align-items: center;
   gap: 1.2rem;
+  list-style: none;
+  padding: 1.5rem;
+}
+
+.nav-links.active {
+  display: flex;
 }
 
 .nav-links a {
@@ -79,22 +97,35 @@ header {
   color: var(--strawberry);
 }
 
-.menu-toggle {
-  display: none;
-  background: var(--yellow);
-  border: none;
-  padding: .7rem;
-  border-radius: 12px;
-  font-size: 1.2rem;
+.menu-toggle,
+.cookie-btn {
+  display: block;
+  background: var(--cookie);
+  border: 4px solid #d6a96c;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  font-size: 2rem;
+  transition: transform 0.3s ease;
 }
+
+.menu-toggle:hover,
+.cookie-btn:hover {
+  transform: rotate(15deg) scale(1.1);
+  cursor: pointer;
+}
+
+/* ==========================
+   HERO - MOBILE FIRST
+========================== */
 
 .hero {
   min-height: 90vh;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   align-items: center;
   gap: 2rem;
-  padding: 4rem 8%;
+  padding: 3rem 1.2rem;
   background: linear-gradient(135deg, var(--cookie), var(--mint), var(--blueberry));
 }
 
@@ -118,6 +149,7 @@ header {
 
 .hero-buttons {
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-top: 2rem;
 }
@@ -130,6 +162,7 @@ header {
   font-weight: 800;
   cursor: pointer;
   display: inline-block;
+  text-align: center;
 }
 
 .primary {
@@ -144,12 +177,16 @@ header {
 
 .hero-image img {
   border-radius: 40px;
-  box-shadow: 15px 15px 0 var(--strawberry);
+  box-shadow: 10px 10px 0 var(--strawberry);
 }
+
+/* ==========================
+   SECTIONS / GRIDS - MOBILE FIRST
+========================== */
 
 .features {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   text-align: center;
   gap: 1.5rem;
   padding: 2rem 8%;
@@ -173,7 +210,7 @@ header {
 .gallery,
 .visit,
 .contact {
-  padding: 5rem 8%;
+  padding: 3rem 1.2rem;
 }
 
 .section-title {
@@ -189,11 +226,8 @@ header {
 .testimonial-grid,
 .gallery-grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 1.5rem;
-}
-
-.product-grid {
-  grid-template-columns: repeat(4, 1fr);
 }
 
 .product-card {
@@ -229,10 +263,6 @@ header {
   background: var(--cookie);
 }
 
-.menu-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
 .menu-card {
   background: white;
   padding: 1.5rem;
@@ -255,22 +285,18 @@ header {
 .rewards {
   text-align: center;
   background: linear-gradient(135deg, var(--strawberry), var(--yellow));
-  padding: 5rem 8%;
+  padding: 3rem 1.2rem;
 }
 
 .rewards h2 {
   font-family: "Lilita One", cursive;
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 8vw, 4rem);
 }
 
 .rewards p {
   max-width: 700px;
   margin: 1rem auto 2rem;
   font-size: 1.2rem;
-}
-
-.reward-grid {
-  grid-template-columns: repeat(3, 1fr);
 }
 
 .reward-card {
@@ -287,9 +313,9 @@ header {
 
 .about {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
-  margin: 30px;
+  margin: 30px 1.2rem;
 }
 
 .about p {
@@ -300,10 +326,6 @@ header {
 
 .about img {
   border-radius: 40px;
-}
-
-.testimonial-grid {
-  grid-template-columns: repeat(4, 1fr);
 }
 
 .testimonial {
@@ -328,10 +350,6 @@ header {
   margin-bottom: 2rem;
 }
 
-.gallery-grid {
-  grid-template-columns: repeat(4, 1fr);
-}
-
 .gallery-grid img {
   height: 250px;
   object-fit: cover;
@@ -349,7 +367,7 @@ header {
 .visit-grid,
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 2rem;
 }
 
@@ -375,8 +393,7 @@ form {
 }
 
 .contact-info {
-    text-align: center;
-    padding: 150px 50px;
+  text-align: center;
 }
 
 .contact-subtitle {
@@ -417,7 +434,7 @@ textarea {
 
 .newsletter h2 {
   font-family: "Lilita One", cursive;
-  font-size: 3rem;
+  font-size: clamp(2.3rem, 7vw, 3rem);
 }
 
 .newsletter p {
@@ -428,6 +445,7 @@ textarea {
   max-width: 500px;
   margin: auto;
   display: flex;
+  flex-direction: column;
   gap: 1rem;
 }
 
@@ -442,22 +460,59 @@ textarea {
   padding: 1rem 1.5rem;
   border-radius: 999px;
   font-weight: 800;
+  cursor: pointer;
 }
 
+/* ==========================
+   FOOTER - MOBILE FIRST
+========================== */
+
 footer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "copyright"
+    "companyquote"
+    "designer";
+  gap: 1rem;
+  align-items: center;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem 1rem;
   background: var(--chocolate);
   color: white;
 }
 
+#copy-right {
+  grid-area: copyright;
+}
+
+#company-quote {
+  grid-area: companyquote;
+}
+
+#designer {
+  grid-area: designer;
+}
+
 .mobile-order-btn {
-  display: none;
+  display: block;
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--strawberry);
+  color: white;
+  padding: 1rem 1.6rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  z-index: 2000;
+  box-shadow: 0 8px 25px rgba(92, 64, 51, .3);
 }
 
 .cookie-banner {
   position: fixed;
-  bottom: 20px;
+  bottom: 90px;
   left: 20px;
   right: 20px;
   background: white;
@@ -466,10 +521,12 @@ footer {
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0,0,0,.15);
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
   z-index: 3000;
+  text-align: center;
 }
 
 .cookie-banner button {
@@ -481,15 +538,13 @@ footer {
   font-weight: 800;
 }
 
+/* ==========================
+   TABLET: 600px AND UP
+========================== */
 
-
-/* MEDIA QUERIES */
-@media (max-width: 900px) {
-  .hero,
-  .about,
-  .visit-grid,
-  .contact-grid {
-    grid-template-columns: 1fr;
+@media (min-width: 600px) {
+  .hero-buttons {
+    flex-direction: row;
   }
 
   .product-grid,
@@ -499,55 +554,47 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .reward-grid,
-  .features {
-    grid-template-columns: 1fr;
+  .newsletter-form {
+    flex-direction: row;
   }
 
-  .nav-links {
-    position: absolute;
-    top: 90px;
-    left: 0;
-    width: 100%;
-    background: white;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
+  .cookie-banner {
+    bottom: 20px;
+    flex-direction: row;
+    text-align: left;
+  }
+}
+
+/* ==========================
+   LARGE TABLET / SMALL DESKTOP: 900px AND UP
+========================== */
+
+@media (min-width: 900px) {
+  .menu-toggle,
+  .cookie-btn {
     display: none;
   }
 
-  .nav-links.active {
+  .nav-links {
+    position: static;
+    width: auto;
     display: flex;
+    flex-direction: row;
+    background: transparent;
+    padding: 0;
   }
 
-  .menu-toggle {
-    display: block;
-  }
-
-  
-    .cookie-btn {
-        background: var(--cookie);
-        border: 4px solid #d6a96c;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        font-size: 2rem;
-        transition: transform 0.3s ease;
-}
-
-    .cookie-btn:hover {
-        transform: rotate(15deg) scale(1.1);
-        cursor: pointer;
-}
-
-    .menu-toggle {
-        display: block;
-  }
-}
-
-@media (max-width: 600px) {
   .hero {
-    padding: 3rem 1.2rem;
+    grid-template-columns: 1fr 1fr;
+    padding: 4rem 8%;
+  }
+
+  .hero-image img {
+    box-shadow: 15px 15px 0 var(--strawberry);
+  }
+
+  .features {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .section,
@@ -556,60 +603,53 @@ footer {
   .gallery,
   .visit,
   .contact {
-    padding: 3rem 1.2rem;
+    padding: 5rem 8%;
   }
 
   .product-grid,
   .menu-grid,
   .testimonial-grid,
   .gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(4, 1fr);
   }
 
-  .hero-buttons {
-    flex-direction: column;
+  .reward-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about {
+    grid-template-columns: 1fr 1fr;
+    margin: 30px;
+  }
+
+  .visit-grid,
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .contact-info {
+    padding: 150px 50px;
+  }
+
+  footer {
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-areas:
+      "copyright companyquote designer";
+    gap: 20px;
+    padding: 2rem;
   }
 
   .mobile-order-btn {
-    display: block;
-    position: fixed;
-    bottom: 18px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--strawberry);
-    color: white;
-    padding: 1rem 1.6rem;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 800;
-    z-index: 2000;
-    box-shadow: 0 8px 25px rgba(92, 64, 51, .3);
+    display: none;
   }
-
-   .nav-links.active {
-    display: flex;
-  }
-
-    .cookie-btn {
-        background: var(--cookie);
-        border: 4px solid #d6a96c;
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-        font-size: 2rem;
-        transition: transform 0.3s ease;
 }
 
-    .cookie-btn:hover {
-        transform: rotate(15deg) scale(1.1);
-        cursor: pointer;
-}
+/* ==========================
+   LARGE DESKTOP: 1200px AND UP
+========================== */
 
-    .menu-toggle {
-        display: block;
-  }
-
-  .newsletter-form {
-    flex-direction: column;
+@media (min-width: 1200px) {
+  .navbar {
+    padding: 1rem 2rem;
   }
 }
